@@ -23,8 +23,11 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm<IFormLogin>({
     resolver: yupResolver(schema),
-    mode: "onBlur",
-    defaultValues,
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
     reValidateMode: "onChange",
   });
 
@@ -49,7 +52,7 @@ const Login = () => {
             errorMessage={errors?.password?.message}
           />
           <Spacing />
-          <Button title="Entrar" />
+          <Button title="Entrar" disabled={!isValid}/>
         </Column>
       </LoginContainer>
     </Container>
